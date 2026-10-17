@@ -358,7 +358,7 @@ function Index() {
           <p className="reveal mt-2 inline-block rounded-md border-2 border-ink bg-gold px-3 py-1 text-sm font-bold">Suggested walking order — crowd dependent, not a guaranteed shortest route.</p>
           <ul className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-6">
             {shown.filter((p) => p.category === "core").length === 0 && <li className="col-span-full rounded-xl border-[3px] border-dashed border-ink p-8 text-center font-bold">No core stops match your search or filter.</li>}
-            {shown.filter((p) => p.category === "core").map((p, i) => card(p, i, CORE.indexOf(p) + 1, spans[CORE.indexOf(p)]))}
+            {shown.filter((p) => p.category === "core").map((p, i) => card(p, i, CORE.indexOf(p) + 1, spans[CORE.indexOf(p)]!))}
           </ul>
 
           {routeMode === "extended" && (
@@ -367,7 +367,7 @@ function Index() {
               <p className="reveal mt-2 inline-block rounded-md border-2 border-ink bg-gold px-3 py-1 text-sm font-bold">Nearby extensions — may need an auto, toto or cab depending on crowds.</p>
               <ul className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-6">
                 {shown.filter((p) => p.category === "extension").length === 0 && <li className="col-span-full rounded-xl border-[3px] border-dashed border-ink p-8 text-center font-bold">No add-on stops match your search or filter.</li>}
-                {shown.filter((p) => p.category === "extension").map((p, i) => card(p, i, EXTENSIONS.indexOf(p) + 6, spans[EXTENSIONS.indexOf(p)]))}
+                {shown.filter((p) => p.category === "extension").map((p, i) => card(p, i, EXTENSIONS.indexOf(p) + 6, spans[EXTENSIONS.indexOf(p)]!))}
               </ul>
             </>
           )}
