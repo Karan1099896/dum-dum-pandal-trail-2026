@@ -1,0 +1,126 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-vermilion: var(--vermilion);
+  --color-marigold: var(--marigold);
+  --color-pink: var(--pink);
+  --color-cobalt: var(--cobalt);
+  --color-emerald: var(--emerald);
+  --color-gold: var(--gold);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --font-display: "Abril Fatface", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --vermilion: oklch(0.55 0.21 30);
+  --marigold: oklch(0.76 0.17 65);
+  --pink: oklch(0.62 0.24 355);
+  --cobalt: oklch(0.42 0.19 265);
+  --emerald: oklch(0.52 0.13 160);
+  --gold: oklch(0.83 0.14 88);
+  --paper: oklch(0.96 0.03 85);
+  --ink: oklch(0.2 0.04 30);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.02 85);
+  --card-foreground: var(--ink);
+  --popover: var(--card);
+  --popover-foreground: var(--ink);
+  --primary: var(--vermilion);
+  --primary-foreground: oklch(0.98 0.02 85);
+  --secondary: var(--cobalt);
+  --secondary-foreground: oklch(0.98 0.02 85);
+  --muted: oklch(0.91 0.04 80);
+  --muted-foreground: oklch(0.4 0.05 40);
+  --accent: var(--marigold);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.5 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--cobalt);
+  --shadow-pop: 6px 6px 0 0 var(--ink);
+  --shadow-pop-sm: 3px 3px 0 0 var(--ink);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(circle at 20% 10%, color-mix(in oklab, var(--marigold) 18%, transparent), transparent 40%),
+      radial-gradient(circle at 85% 60%, color-mix(in oklab, var(--pink) 12%, transparent), transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  }
+  :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+}
+
+@utility font-display { font-family: var(--font-display); }
+@utility shadow-pop { box-shadow: var(--shadow-pop); }
+@utility shadow-pop-sm { box-shadow: var(--shadow-pop-sm); }
+@utility alpona-border {
+  background-image: repeating-linear-gradient(90deg, var(--vermilion) 0 14px, var(--marigold) 14px 28px, var(--pink) 28px 42px, var(--cobalt) 42px 56px, var(--emerald) 56px 70px);
+}
+@utility dots-bg {
+  background-image: radial-gradient(color-mix(in oklab, var(--paper) 40%, transparent) 1.5px, transparent 1.6px);
+  background-size: 14px 14px;
+}
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-14px) rotate(8deg); } }
+@keyframes rise { from { opacity: 0; transform: translateY(28px) rotate(-1deg); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.25) rotate(-8deg); } 100% { transform: scale(1); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+@utility animate-marquee { animation: marquee 28s linear infinite; }
+@utility animate-floaty { animation: floaty 6s ease-in-out infinite; }
+@utility animate-pop { animation: pop .45s cubic-bezier(.3,1.6,.5,1); }
+@utility animate-spin-slow { animation: spin-slow 40s linear infinite; }
+@utility reveal {
+  opacity: 0;
+  &.is-in { animation: rise .7s cubic-bezier(.2,.9,.3,1.2) forwards; }
+}
+@utility spring {
+  transition: transform .35s cubic-bezier(.3,1.7,.5,1), box-shadow .2s;
+  &:hover { transform: translate(-2px,-3px) rotate(-.6deg); }
+  &:active { transform: translate(2px,2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; }
+  html { scroll-behavior: auto; }
+}
